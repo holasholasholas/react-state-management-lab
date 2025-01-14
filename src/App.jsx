@@ -1,8 +1,14 @@
 // src/App.jsx
-
+import "./App.css"
 import { useState } from "react";
+import FighterList from "./whiteboard";
+
+
+
 
 const App = () => {
+
+
 
 const team = []
 const [money, setMoney] = useState(100)
@@ -89,16 +95,23 @@ const zombieFighters = [
   },
 ]
 
-
   return (
+    
+
+
     <>
     
+    
     <h1>Zombie Fighters</h1>
+    <h4><FighterList /></h4>
+    
     <div>Money: {money}</div>
-    <div>Team Strength:</div>
+    <div>Team Strength: </div>
     <div>Team Agility:</div>
     <div>Team</div>
     <div>Fighters</div>
+    <section>
+    </section>
     
     
     </>
