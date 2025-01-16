@@ -1,73 +1,127 @@
-// src/App.jsx
-import "./App.css";
-import { useState } from "react";
-import zombieFighters from "./zombiefighters";
+import React, { useState } from 'react'
+import "./App.css"
+
+  const zombieFighters = [
+  {
+    id: 1,
+    name: 'Survivor',
+    price: 12,
+    strength: 6,
+    agility: 4,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/0c2d6b.png',
+  },
+  {
+    id: 2,
+    name: 'Scavenger',
+    price: 10,
+    strength: 5,
+    agility: 5,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/033a16.png',
+  },
+  {
+    id: 3,
+    name: 'Shadow',
+    price: 18,
+    strength: 7,
+    agility: 8,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/262c36.png',
+  },
+  {
+    id: 4,
+    name: 'Tracker',
+    price: 14,
+    strength: 7,
+    agility: 6,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/3c1e70.png',
+  },
+  {
+    id: 5,
+    name: 'Sharpshooter',
+    price: 20,
+    strength: 6,
+    agility: 8,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/4b2900.png',
+  },
+  {
+    id: 6,
+    name: 'Medic',
+    price: 15,
+    strength: 5,
+    agility: 7,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/5a1e02.png',
+  },
+  {
+    id: 7,
+    name: 'Engineer',
+    price: 16,
+    strength: 6,
+    agility: 5,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/5e103e.png',
+  },
+  {
+    id: 8,
+    name: 'Brawler',
+    price: 11,
+    strength: 8,
+    agility: 3,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/67060c.png',
+  },
+  {
+    id: 9,
+    name: 'Infiltrator',
+    price: 17,
+    strength: 5,
+    agility: 9,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/ac3220.png',
+  },
+  {
+    id: 10,
+    name: 'Leader',
+    price: 22,
+    strength: 7,
+    agility: 6,
+    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/e41f26.png',
+  },
+];
 
 const App = () => {
-  const [team, setTeam] = useState([]);
-  const [money, setMoney] = useState(100);
 
-  const handleAddFighter = (fighter) => {
-    if (money < fighter.price) {
-      console.log("Not enough money");
-      return;
-    }
-    setTeam([...team, fighter]);
-    setMoney(money - fighter.price);
-  };
+const [team, setTeam] = useState([])
+const [money, setMoney] = useState(0)
 
-  const handleRemoveFighter = (member) => {
-    console.log("Fighter removed!");
-    setTeam(team.filter(removeMember => removeMember.id != member.id));
-    setMoney(member.price + money);
-  };
+const handleAddFighter = (zombie) =>{
+if(money < zombie.price){
+  console.log("not enough money");
+ return;
+}
 
-  const totalStrength = () => {
-    if (team.length === 0) {
-      return 0
-    } else {
-      return team.reduce((sum, member) => sum + member.strength,0)
-    }
-  }
-  const totalAgility = () => {
-    if (team.length === 0) {
-      return 0
-    } else {
-      return team.reduce((sum, member) => sum + member.agility,0)
-    }
-  
+setTeam([...team, zombie]);
+setMoney(money - zombie.price);
 }
 
 
-  return (
-    <>
-      <h1>Zombie Fighters</h1>
-      <h4></h4>
+return (
+  <>
+    <h1>Zombie Fighters</h1>
+    <div>
+      <p>Money: {money}</p>
+      <p>Team Strength:</p>
+      <p>Team Agility:</p>
+      <p>Team: {team.length}</p>
+      </div>
+    <div className="fighterBox"> 
+      {zombieFighters.map((zombie) => (<div key={zombie.name}>
+        <img src= {zombie.img}/>
+          <p>{zombie.name}</p>
+          Price: {zombie.price}
+          <p>Strength: {zombie.strength}</p>
+          <p>Agility: {zombie.agility}</p>
+          <button onClick={() => handleAddFighter()}>Add</button>
+         </div>
+      ))}
+    </div>
+  </>
+)
+}
 
-      <div>Money: {money}</div>
-      <div>Team Strength: {totalStrength()} </div>
-      <div>Team Agility: {totalAgility()}</div>
-      <div>Team</div>
-      {team.length === 0 ? ("Pick some team members!") : <p>Time to fight!</p> }
-      <div>Fighters</div>
-      
-        <div className="zombies">
-          {zombieFighters.map((zombie) => (
-            <>
-              <ul key={zombie.id}>
-              <p>Name: {zombie.name}</p>
-              <p>Price: {zombie.price}</p>
-              <p>Strength: {zombie.strength}</p>
-              <p>Agility: {zombie.agility}</p>
-              </ul>
-            </>
-          ))}
-        </div>
-      
-      <button onClick={() => handleAddFighter(fighter)}>Add</button>
-      <section></section>
-    </>
-  );
-};
-
-export default App;
+export default App
