@@ -1,4 +1,6 @@
-const zombieFighters = [
+const zombieFighters = () => {
+
+  return [
     {
       id: 1,
       name: "Survivor",
@@ -78,7 +80,8 @@ const zombieFighters = [
       strength: 7,
       agility: 6,
       img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/e41f26.png",
-    },
+    }
   ];
-  
-  export default zombieFighters;
+};
+
+export default zombieFighters;
